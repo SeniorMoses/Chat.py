@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 from config import DBURL
 
 engine = create_engine(
-    DATABASE_URL,
+    DBURL,
     pool_size=10,
     max_overflow=20,
     pool_pre_ping=True,
