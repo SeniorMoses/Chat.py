@@ -14,7 +14,7 @@ TOKEN_EXPIRE_DAYS
 )
 
 oauth2_scheme = OAuth2PasswordBearer(
-tokenUrl="/login"
+tokenUrl="/signin"
 )
 
 def create_access_token(user_data: dict):
@@ -51,7 +51,7 @@ def create_refresh_token(
     refresh_token = RefreshToken(
     token=raw_token,
     user_id=user_id,
-    exp_at=exp
+    expires_at=exp
     )
 
     db.add(refresh_token)
