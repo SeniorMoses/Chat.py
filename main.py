@@ -1,43 +1,30 @@
 from fastapi import FastAPI
 
-from users import router as users_router
-from chat import router as chat_router
+import users
+import chat
 
 
 app = FastAPI(
     title="Chat API",
-    description="Simple FastAPI messaging application",
+    description="Simple FastAPI chat application",
     version="1.0.0"
-)
+   ) 
 
 
 # =========================
 # ROUTERS
 # =========================
 
-app.include_router(users)
-app.include_router(chat)
+app.include_router(users.router)
+app.include_router(chat.router)
 
 
 # =========================
-# HOMEPAGE
+# ROOT
 # =========================
 
 @app.get("/")
-async def homepage():
-
+def root():
     return {
-        "message": "Chat API is running",
-        "status": "online",
-        "endpoints": {
-            "signup": "/users/signup",
-            "signin": "/users/signin",
-
-            "online_users": "/chat/online",
-            "check_online": "/chat/online/{username}",
-
-            "websocket": "/chat/ws?token=YOUR_ACCESS_TOKEN",
-
-            "docs": "/docs"
-        }
-    }
+        "message": "Chat API is running"
+    } 
