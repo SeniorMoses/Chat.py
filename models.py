@@ -8,8 +8,15 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     username = Column(String, unique=True, nullable=False)
     email=Column(String, unique=True, nullable=False)
+    password=Column(String, nullable=False)
+    role=Column(String, default="user", nullable=False) 
     image=Column(String)
     created_at=Column(DateTime, default=func.now()) 
+    refresh_tokens = relationship(
+    "RefreshToken",
+    back_populates="user",
+    cascade="all, delete-orphan"
+    )
 
 class Message(Base):
     __tablename__ = "messages"
